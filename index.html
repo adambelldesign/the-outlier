@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100%;
+      overflow: hidden;
+    }
+    #container {
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    #container::-webkit-scrollbar {
+      display: none;
+    }
+    img {
+      height: 100vh;
+      width: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img src="An Outlier Combined.jpg">
+  </div>
+  <script>
+    const container = document.getElementById('container');
+    let targetScroll = 0;
+    let currentScroll = 0;
+
+    container.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      targetScroll += e.deltaY * 0.8;
+      targetScroll = Math.max(0, Math.min(targetScroll, container.scrollWidth - container.clientWidth));
+    }, { passive: false });
+
+    function animate() {
+      currentScroll += (targetScroll - currentScroll) * 0.08;
+      container.scrollLeft = currentScroll;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

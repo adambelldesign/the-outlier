@@ -39,7 +39,7 @@
 
     container.addEventListener('wheel', function(e) {
       e.preventDefault();
-      targetScroll += e.deltaY * 0.8;
+      targetScroll += (e.deltaY + e.deltaX) * 0.8;
       targetScroll = Math.max(0, Math.min(targetScroll, container.scrollWidth - container.clientWidth));
     }, { passive: false });
 
